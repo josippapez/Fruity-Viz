@@ -1,16 +1,100 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-
-import { fetchAllFruit, fetchCertainFruit } from '../../store/actions/fruitsActions'
 import { ResponsiveAreaBump } from '@nivo/bump'
 
+import { fetchAllFruit, fetchCertainFruit } from '../../store/actions/fruitsActions'
+
 class Homepage extends Component {
+    state = ({
+        toggled: true,
+        data: [],
+        calories: true,
+        carbs: true,
+        fat: true,
+        protein: true,
+        sugar: true,
+    });
+
     componentDidMount() {
         this.props.actions.fetchAllFruit();
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.fruits !== prevProps.fruits) {
+            this.setState({
+                data: this.props.fruits && this.props.fruits.map(fruit => ({
+                    id: fruit.name,
+                    data: [
+                        {
+                            y: (fruit.nutritions.calories),
+                            x: "Calories",
+                        },
+                        {
+                            y: (fruit.nutritions.carbohydrates),
+                            x: "Carbohydrates",
+                        },
+                        {
+                            y: (fruit.nutritions.fat),
+                            x: "Fat",
+                        },
+                        {
+                            y: (fruit.nutritions.protein),
+                            x: "Protein",
+                        },
+                        {
+                            y: (fruit.nutritions.sugar),
+                            x: "Sugar"
+                        },
+                    ]
+                })),
+            });
+        }
+        if (this.state.toggled !== prevState.toggled) {
+            this.setState({
+                data: this.props.fruits && this.props.fruits.map(fruit => ({
+                    id: fruit.name,
+                    data: [
+                        {
+                            y: (fruit.nutritions.calories),
+                            x: "Calories",
+                            toggle: this.state.calories,
+                        },
+                        {
+                            y: (fruit.nutritions.carbohydrates),
+                            x: "Carbohydrates",
+                            toggle: this.state.carbs,
+                        },
+                        {
+                            y: (fruit.nutritions.fat),
+                            x: "Fat",
+                            toggle: this.state.fat,
+                        },
+                        {
+                            y: (fruit.nutritions.protein),
+                            x: "Protein",
+                            toggle: this.state.protein,
+                        },
+                        {
+                            y: (fruit.nutritions.sugar),
+                            x: "Sugar",
+                            toggle: this.state.sugar,
+                        },
+                    ].filter(element => element.toggle === true)
+                })),
+            });
+        }
+    }
+
+    hideNes = (type) => {
+        this.setState({
+            [type]: !this.state[type],
+            toggled: !this.state.toggled
+        })
+    }
+
     render() {
-        let caloriesMax = 0;
+        /* let caloriesMax = 0;
         let carbohydratesMax = 0;
         let fatMax = 0;
         let proteinMax = 0;
@@ -21,37 +105,27 @@ class Homepage extends Component {
             if (fruit.nutritions.fat > fatMax) fatMax = fruit.nutritions.fat;
             if (fruit.nutritions.protein > proteinMax) proteinMax = fruit.nutritions.protein;
             if (fruit.nutritions.sugar > sugarMax) sugarMax = fruit.nutritions.sugar;
-        });
-        const data = this.props.fruits.map(fruit => ({
-            id: fruit.name,
-            data: [
-                {
-                    y: (fruit.nutritions.calories/caloriesMax),
-                    x: "Calories",
-                },
-                {
-                    y: (fruit.nutritions.carbohydrates/carbohydratesMax),
-                    x: "Carbohydrates",
-                },
-                {
-                    y: (fruit.nutritions.fat/fatMax),
-                    x: "Fat",
-                },
-                {
-                    y: (fruit.nutritions.protein/proteinMax),
-                    x: "Protein",
-                },
-                {
-                    y: (fruit.nutritions.sugar/sugarMax),
-                    x: "Sugar"
-                },
-            ]
-        }));
+        }); */
         return (
             <div style={{height : "600px"}}>
-                {this.props.fruits.length && (
+                <button className={this.state.calories ? "btn-primary" : "btn-danger"} onClick={() => this.hideNes("calories")}>
+                    Toggle Calories
+                </button>
+                <button className={this.state.carbs ? "btn-primary" : "btn-danger"} onClick={() => this.hideNes("carbs")}>
+                    Toggle Carbohydrates
+                </button>
+                <button className={this.state.fat ? "btn-primary" : "btn-danger"} onClick={() => this.hideNes("fat")}>
+                    Toggle Fat
+                </button>
+                <button className={this.state.protein ? "btn-primary" : "btn-danger"} onClick={() => this.hideNes("protein")}>
+                    Toggle Protein
+                </button>
+                <button className={this.state.sugar ? "btn-primary" : "btn-danger"} onClick={() => this.hideNes("sugar")}>
+                    Toggle Sugar
+                </button>
+                {this.state.data.length && this.state.data[0].data.length ? (
                     <ResponsiveAreaBump
-                        data={data}
+                        data={this.state.data}
                         margin={{ top: 40, right: 100, bottom: 40, left: 100 }}
                         spacing={8}
                         colors={{ scheme: 'nivo' }}
@@ -73,8 +147,10 @@ class Homepage extends Component {
                             legendPosition: 'middle',
                             legendOffset: 32
                         }}
+                        motionStiffness={300}
+                        motionDamping={24}
                     />
-                )}
+                ) : null}
             </div>
         )
     }
