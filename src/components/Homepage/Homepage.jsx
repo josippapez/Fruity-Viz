@@ -3,11 +3,13 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { ResponsiveAreaBump } from '@nivo/bump'
 
+import "./Homepage.scss"
 import { fetchAllFruit, fetchCertainFruit } from '../../store/actions/fruitsActions'
 
 class Homepage extends Component {
     state = ({
         toggled: true,
+        notStandardized: true,
         data: [],
         calories: true,
         carbs: true,
@@ -22,7 +24,25 @@ class Homepage extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (this.props.fruits !== prevProps.fruits) {
+            let caloriesMax = 0;
+            let carbohydratesMax = 0;
+            let fatMax = 0;
+            let proteinMax = 0;
+            let sugarMax = 0;
+            // eslint-disable-next-line array-callback-return
+            this.props.fruits.map(fruit => {
+                if (fruit.nutritions.calories > caloriesMax) caloriesMax = fruit.nutritions.calories;
+                if (fruit.nutritions.carbohydrates > carbohydratesMax) carbohydratesMax = fruit.nutritions.carbohydrates;
+                if (fruit.nutritions.fat > fatMax) fatMax = fruit.nutritions.fat;
+                if (fruit.nutritions.protein > proteinMax) proteinMax = fruit.nutritions.protein;
+                if (fruit.nutritions.sugar > sugarMax) sugarMax = fruit.nutritions.sugar;
+            });
             this.setState({
+                caloriesMax,
+                carbohydratesMax,
+                fatMax,
+                proteinMax,
+                sugarMax,
                 data: this.props.fruits && this.props.fruits.map(fruit => ({
                     id: fruit.name,
                     data: [
@@ -43,8 +63,8 @@ class Homepage extends Component {
                             x: "Protein",
                         },
                         {
-                            y: (fruit.nutritions.sugar),
-                            x: "Sugar"
+                            y: (fruit.nutritions.sugar) ,
+                            x: "Sugar",
                         },
                     ]
                 })),
@@ -56,27 +76,27 @@ class Homepage extends Component {
                     id: fruit.name,
                     data: [
                         {
-                            y: (fruit.nutritions.calories),
+                            y: this.state.notStandardized ? (fruit.nutritions.calories) : (fruit.nutritions.calories/this.state.caloriesMax),
                             x: "Calories",
                             toggle: this.state.calories,
                         },
                         {
-                            y: (fruit.nutritions.carbohydrates),
+                            y: this.state.notStandardized ? (fruit.nutritions.carbohydrates) : (fruit.nutritions.carbohydrates/this.state.carbohydratesMax),
                             x: "Carbohydrates",
                             toggle: this.state.carbs,
                         },
                         {
-                            y: (fruit.nutritions.fat),
+                            y: this.state.notStandardized ? (fruit.nutritions.fat) : (fruit.nutritions.fat/this.state.fatMax),
                             x: "Fat",
                             toggle: this.state.fat,
                         },
                         {
-                            y: (fruit.nutritions.protein),
+                            y: this.state.notStandardized ? (fruit.nutritions.protein) : (fruit.nutritions.protein/this.state.proteinMax),
                             x: "Protein",
                             toggle: this.state.protein,
                         },
                         {
-                            y: (fruit.nutritions.sugar),
+                            y: this.state.notStandardized ? (fruit.nutritions.sugar) : (fruit.nutritions.sugar/this.state.sugarMax),
                             x: "Sugar",
                             toggle: this.state.sugar,
                         },
@@ -94,42 +114,35 @@ class Homepage extends Component {
     }
 
     render() {
-        /* let caloriesMax = 0;
-        let carbohydratesMax = 0;
-        let fatMax = 0;
-        let proteinMax = 0;
-        let sugarMax = 0;
-        this.props.fruits.map(fruit => {
-            if (fruit.nutritions.calories > caloriesMax) caloriesMax = fruit.nutritions.calories;
-            if (fruit.nutritions.carbohydrates > carbohydratesMax) carbohydratesMax = fruit.nutritions.carbohydrates;
-            if (fruit.nutritions.fat > fatMax) fatMax = fruit.nutritions.fat;
-            if (fruit.nutritions.protein > proteinMax) proteinMax = fruit.nutritions.protein;
-            if (fruit.nutritions.sugar > sugarMax) sugarMax = fruit.nutritions.sugar;
-        }); */
+        const toggleButtons = ["calories", "carbs", "fat", "protein", "sugar"];
+        console.log(this.state);
         return (
             <div style={{height : "600px"}}>
-                <button className={this.state.calories ? "btn-primary" : "btn-danger"} onClick={() => this.hideNes("calories")}>
-                    Toggle Calories
-                </button>
-                <button className={this.state.carbs ? "btn-primary" : "btn-danger"} onClick={() => this.hideNes("carbs")}>
-                    Toggle Carbohydrates
-                </button>
-                <button className={this.state.fat ? "btn-primary" : "btn-danger"} onClick={() => this.hideNes("fat")}>
-                    Toggle Fat
-                </button>
-                <button className={this.state.protein ? "btn-primary" : "btn-danger"} onClick={() => this.hideNes("protein")}>
-                    Toggle Protein
-                </button>
-                <button className={this.state.sugar ? "btn-primary" : "btn-danger"} onClick={() => this.hideNes("sugar")}>
-                    Toggle Sugar
-                </button>
+                <div className="container text-center">
+                    {toggleButtons.map(data => {return (
+                        <button
+                            className={`toggleButton p-3 m-3 text-capitalize border-0 ${this.state[data] ? "btn-success" : "btn-danger"}`}
+                            onClick={() => this.hideNes(data)}
+                            key={data}
+                        >
+                            {`Toggle ${data}`}
+                        </button>
+                    )})}
+                    <div className="buttonBorder"></div>
+                    <button
+                        className={`toggleButton border-0 ml-5 p-3 ${this.state.notStandardized ? "btn-danger" : "btn-primary"}`}
+                        onClick={() => this.hideNes("notStandardized")}
+                    >
+                        Standardize
+                    </button>
+                </div>
                 {this.state.data.length && this.state.data[0].data.length ? (
                     <ResponsiveAreaBump
                         data={this.state.data}
                         margin={{ top: 40, right: 100, bottom: 40, left: 100 }}
                         spacing={8}
                         colors={{ scheme: 'nivo' }}
-                        blendMode="multiply"
+                        blendMode="normal"
                         startLabel="id"
                         axisTop={{
                             tickSize: 5,

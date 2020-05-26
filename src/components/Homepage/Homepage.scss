@@ -1,0 +1,14 @@
+.toggleButton {
+    border-radius: 8px;
+}
+.buttonBorder {
+    display: inline-flex;
+    height: 60px;
+    width: 0px;
+    position: relative;
+    top: 25px;
+    left: 15px;
+    align-content: center;
+    justify-content: center;
+    border-right: 2px solid black;
+}
