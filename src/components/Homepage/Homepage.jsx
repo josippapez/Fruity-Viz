@@ -17,11 +17,11 @@ class Homepage extends Component {
       toggled: true,
       notStandardized: true,
       data: [],
-      calories: true,
-      carbs: true,
-      fat: true,
-      protein: true,
-      sugar: true,
+      Calories: true,
+      Carbohydrates: true,
+      Fat: true,
+      Protein: true,
+      Sugar: true,
       showDetailed: false,
     };
     this.radarGraph = React.createRef();
@@ -97,7 +97,7 @@ class Homepage extends Component {
                   ? fruit.nutritions.calories
                   : fruit.nutritions.calories / this.state.caloriesMax,
                 x: "Calories",
-                toggle: this.state.calories,
+                toggle: this.state.Calories,
               },
               {
                 y: this.state.notStandardized
@@ -105,28 +105,28 @@ class Homepage extends Component {
                   : fruit.nutritions.carbohydrates /
                     this.state.carbohydratesMax,
                 x: "Carbohydrates",
-                toggle: this.state.carbs,
+                toggle: this.state.Carbohydrates,
               },
               {
                 y: this.state.notStandardized
                   ? fruit.nutritions.fat
                   : fruit.nutritions.fat / this.state.fatMax,
                 x: "Fat",
-                toggle: this.state.fat,
+                toggle: this.state.Fat,
               },
               {
                 y: this.state.notStandardized
                   ? fruit.nutritions.protein
                   : fruit.nutritions.protein / this.state.proteinMax,
                 x: "Protein",
-                toggle: this.state.protein,
+                toggle: this.state.Protein,
               },
               {
                 y: this.state.notStandardized
                   ? fruit.nutritions.sugar
                   : fruit.nutritions.sugar / this.state.sugarMax,
                 x: "Sugar",
-                toggle: this.state.sugar,
+                toggle: this.state.Sugar,
               },
             ].filter((element) => element.toggle === true),
           })),
@@ -134,7 +134,7 @@ class Homepage extends Component {
     }
   }
 
-  hideNes = (type) => {
+  toggleColumn = (type) => {
     this.setState({
       [type]: !this.state[type],
       toggled: !this.state.toggled,
@@ -142,78 +142,80 @@ class Homepage extends Component {
   };
 
   render() {
-    const toggleButtons = ["calories", "carbs", "fat", "protein", "sugar"];
+    const toggleButtons = ["Calories", "Carbohydrates", "Fat", "Protein", "Sugar"];
     return (
-      <div style={{ height: "600px" }}>
-        <div className="container text-center">
-          {toggleButtons.map((data) => {
-            return (
-              <button
-                className={`toggleButton p-3 m-3 text-capitalize border-0 ${
-                  this.state[data] ? "btn-success" : "btn-danger"
-                }`}
-                onClick={() => this.hideNes(data)}
-                key={data}
-              >
-                {`Toggle ${data}`}
-              </button>
-            );
-          })}
-          <div className="buttonBorder"></div>
+      <div className="homepage">
+        <div className="homepageGraph" style={{ height: "600px", minHeight: "600px" }}>
+          <div className="container text-center">
+            {toggleButtons.map((data) => {
+              return (
+                <button
+                  className={`toggleButton p-3 m-3 text-capitalize border-0 ${
+                    this.state[data] ? "btn-success" : "btn-danger"
+                  }`}
+                  onClick={() => this.toggleColumn(data)}
+                  key={data}
+                >
+                  {`Toggle ${data}`}
+                </button>
+              );
+            })}
+            <div className="buttonBorder"></div>
+            <button
+              className={`toggleButton border-0 ml-5 p-3 ${
+                this.state.notStandardized ? "btn-danger" : "btn-primary"
+              }`}
+              onClick={() => this.toggleColumn("notStandardized")}
+            >
+              Standardize
+            </button>
+          </div>
+          {this.state.data.length && this.state.data[0].data.length ? (
+            <ResponsiveAreaBump
+              data={this.state.data}
+              margin={{ top: 40, right: 100, bottom: 40, left: 100 }}
+              spacing={8}
+              colors={{ scheme: "nivo" }}
+              blendMode="normal"
+              startLabel="id"
+              axisTop={{
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0,
+                legend: "",
+                legendPosition: "middle",
+                legendOffset: -36,
+              }}
+              axisBottom={{
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0,
+                legend: "",
+                legendPosition: "middle",
+                legendOffset: 32,
+              }}
+              motionStiffness={300}
+              motionDamping={24}
+            />
+          ) : null}
           <button
-            className={`toggleButton border-0 ml-5 p-3 ${
-              this.state.notStandardized ? "btn-danger" : "btn-primary"
-            }`}
-            onClick={() => this.hideNes("notStandardized")}
+            className="toggleButton nextButton-bottom"
+            onClick={() => {
+              this.setState({ showDetailed: !this.state.showDetailed }, () => {
+                this.state.showDetailed && this.radarGraph.current.scrollIntoView({
+                  behavior: "smooth",
+                  block: "end",
+                  inline: "nearest",
+                });
+              });
+            }}
           >
-            Standardize
+            Radar
           </button>
         </div>
-        {this.state.data.length && this.state.data[0].data.length ? (
-          <ResponsiveAreaBump
-            data={this.state.data}
-            margin={{ top: 40, right: 100, bottom: 40, left: 100 }}
-            spacing={8}
-            colors={{ scheme: "nivo" }}
-            blendMode="normal"
-            startLabel="id"
-            axisTop={{
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: "",
-              legendPosition: "middle",
-              legendOffset: -36,
-            }}
-            axisBottom={{
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: "",
-              legendPosition: "middle",
-              legendOffset: 32,
-            }}
-            motionStiffness={300}
-            motionDamping={24}
-          />
-        ) : null}
-        <button
-          className="toggleButton nextButton-bottom"
-          onClick={() => {
-            this.setState({ showDetailed: !this.state.showDetailed }, () => {
-              this.state.showDetailed && this.radarGraph.current.scrollIntoView({
-                behavior: "smooth",
-                block: "end",
-                inline: "nearest",
-              });
-            });
-          }}
-        >
-          Radar
-        </button>
         {this.state.showDetailed ? (
           <div ref={this.radarGraph} className="radarGraph">
-            <RadarGraph data={this.state.data} />
+            <RadarGraph data={this.state.data} toggleButtons={toggleButtons}/>
           </div>
         ) : null}
       </div>

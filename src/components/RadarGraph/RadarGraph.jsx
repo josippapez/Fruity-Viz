@@ -1,34 +1,43 @@
 import React, { Component } from "react";
 import { ResponsiveRadar } from "@nivo/radar";
+var _ = require('lodash');
 
 class RadarGraph extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      submited: false,
       data: [],
     };
   }
 
   prepareDataToDisplay(leftButtonData, rightButtonData) {
+    let tempArray = [];
+    this.props.toggleButtons.map(name => tempArray.push(Object.assign({},{key: name})));
     let array = [];
     let temp = {};
-    this.props.data.forEach((obj) => {
+    tempArray.map(arr => this.props.data.forEach((obj) => {
       (obj.id === leftButtonData || obj.id === rightButtonData) &&
         obj.data.map((element) => {
-          temp[`${element.x}`] = element.y;
-        }) &&
-        array.push(Object.assign({}, temp));
-    });
+          if(element.x === arr.key) temp[`${obj.id}`] = element.y;
+        }) && array.push(Object.assign(arr, temp))
+    }));
+    array = _.uniq(array);
     this.setState({
-      data: array,
+      data: array
     });
   }
+
   handleSubmit = () => {
+    this.setState({
+      submited: true,
+    });
     this.prepareDataToDisplay(
       this.state.leftButtonData,
       this.state.rightButtonData
     );
   };
+
   render() {
     return (
       <div className="row">
@@ -51,7 +60,7 @@ class RadarGraph extends Component {
                     key={element.id}
                     className="dropdown-item"
                     onClick={() => {
-                      this.setState({ leftButtonData: element.id });
+                      this.setState({ submited: false, leftButtonData: element.id });
                     }}
                   >
                     {element.id}
@@ -61,12 +70,12 @@ class RadarGraph extends Component {
             </div>
           </div>
         </div>
-        <div className={"col-8"} style={{ height: "600px" }}>
-          {this.state.data && (
+        <div className={"col-8"} style={{ height: "800px" }}>
+          {this.state.submited && (
             <ResponsiveRadar
               data={this.state.data}
               keys={[this.state.leftButtonData, this.state.rightButtonData]}
-              indexBy="Calories"
+              indexBy="key"
               maxValue="auto"
               margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
               curve="linearClosed"
@@ -76,7 +85,7 @@ class RadarGraph extends Component {
               gridShape="circular"
               gridLabelOffset={36}
               enableDots={true}
-              dotSize={10}
+              dotSize={20}
               dotColor={{ theme: "background" }}
               dotBorderWidth={2}
               dotBorderColor={{ from: "color" }}
@@ -113,7 +122,15 @@ class RadarGraph extends Component {
               ]}
             />
           )}
-          <button onClick={this.handleSubmit}>Submit</button>
+          <button
+          className="btn-dark submitButton"
+            onClick={() => this.state.leftButtonData
+              && this.state.rightButtonData
+              && this.handleSubmit()
+            }
+            >
+              Submit
+          </button>
         </div>
         <div className="col-2 right-button">
           <button
@@ -133,7 +150,7 @@ class RadarGraph extends Component {
                   key={element.id}
                   className="dropdown-item"
                   onClick={() => {
-                    this.setState({ rightButtonData: element.id });
+                    this.setState({ submited: false, rightButtonData: element.id });
                   }}
                 >
                   {element.id}

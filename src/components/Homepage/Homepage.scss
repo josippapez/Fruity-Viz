@@ -31,7 +31,21 @@
 }
 
 .radarGraph {
-    height:  600px;
+    height:  800px;
     position: relative;
-    top: 50%;
+    top: 50vh;
+}
+
+.submitButton {
+    position: absolute;
+    left: 47%;
+    border-radius: 4px;
+    border: none;
+    padding: 10px;
+}
+
+.left-button {
+    display: inline-flex;
+    flex-direction: row-reverse;
+
 }
