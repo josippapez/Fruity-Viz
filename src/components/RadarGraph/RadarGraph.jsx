@@ -18,6 +18,7 @@ class RadarGraph extends Component {
     let temp = {};
     tempArray.map(arr => this.props.data.forEach((obj) => {
       (obj.id === leftButtonData || obj.id === rightButtonData) &&
+        // eslint-disable-next-line array-callback-return
         obj.data.map((element) => {
           if(element.x === arr.key) temp[`${obj.id}`] = element.y;
         }) && array.push(Object.assign(arr, temp))

@@ -9,6 +9,8 @@ import {
   fetchCertainFruit,
 } from "../../store/actions/fruitsActions";
 import RadarGraph from "../RadarGraph/RadarGraph";
+import "./TreeMap.scss"
+import BubbleGraph from "../BubbleGraph/BubbleGraph";
 
 class Homepage extends Component {
   constructor(props) {
@@ -143,8 +145,9 @@ class Homepage extends Component {
 
   render() {
     const toggleButtons = ["Calories", "Carbohydrates", "Fat", "Protein", "Sugar"];
+    console.log(window);
     return (
-      <div className="homepage">
+      <div className="homepage" style={{ height: window.innerHeight + "px", minHeight: window.innerHeight + "px" }}>
         <div className="homepageGraph" style={{ height: "600px", minHeight: "600px" }}>
           <div className="container text-center">
             {toggleButtons.map((data) => {
@@ -198,6 +201,7 @@ class Homepage extends Component {
               motionDamping={24}
             />
           ) : null}
+          <BubbleGraph fruits={this.props.fruits} />
           <button
             className="toggleButton nextButton-bottom"
             onClick={() => {

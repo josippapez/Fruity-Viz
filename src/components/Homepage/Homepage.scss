@@ -24,6 +24,7 @@
     width: 100%;
     height: 100px;
     bottom: 0;
+    left: 0;
     border: none;
     &:hover {
         background-color: #2123 !important;
@@ -48,4 +49,19 @@
     display: inline-flex;
     flex-direction: row-reverse;
 
+}
+
+.dynamic-treemap {
+    display: inline-flex;
+    border: 2px solid rgba(24, 11, 13, 0.133);
+    width: 330px;
+    border-radius: 50%;
+    padding: 15px;
+    height: 330px;
+    margin-left: 40px;
+}
+
+.node {
+    position: absolute;
+    left: 50%;
 }
