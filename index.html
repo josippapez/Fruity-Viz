@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<head>
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" type="text/css" href="./css/style.css" />
+  <link rel="stylesheet" type="text/css" href="./css/checkbox.css" />
+  <link rel="stylesheet" type="text/css" href="./css/fonts/fonts.css" />
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="./scripts/libs/divgrid.js"></script>
+  <script src="./scripts/libs/d3.parcoords.js"></script>
+</head>
+
+<body>
+  <div class="graphs">
+    <nav class="nav-icons">
+      <a href="index.html" class="menu-dark">
+        <span>Line graph</span>
+        <i class="fab fa-think-peaks"></i>
+      </a>
+      <a href="radar.html" class="menu-orange">
+        <span>Radar Chart</span>
+        <i class="fas fa-crosshairs"></i>
+      </a>
+    </nav>
+    <hr />
+    <div id="grid"></div>
+    <div id="parallelCoords" class="parcoords"></div>
+  </div>
+</body>
+
+<script>
+  var green_to_blue = d3.scale
+    .linear()
+    .domain([9, 50])
+    .range(["#7AC143", "#00B0DD"])
+    .interpolate(d3.interpolateLab);
+
+  var color = function (d) {
+    return green_to_blue(d["name"]);
+  };
+
+  var parcoords = d3.parcoords()("#parallelCoords").color(color).alpha(0.4);
+
+  // load csv file and create the chart
+  d3.csv("./data/fruits.csv", function (data) {
+    parcoords.data(data).render().brushMode("1D-axes"); // enable brushing
+
+    // create data table, row hover highlighting
+    var grid = d3.divgrid();
+    d3.select("#grid")
+      .datum(data.slice(0, 10))
+      .call(grid)
+      .selectAll(".row")
+      .on({
+        mouseover: function (d) {
+          parcoords.highlight([d]);
+        },
+        mouseout: parcoords.unhighlight,
+      });
+
+    // update data table on brush event
+    parcoords.on("brush", function (d) {
+      d3.select("#grid")
+        .datum(d.slice(0, 10))
+        .call(grid)
+        .selectAll(".row")
+        .on({
+          mouseover: function (d) {
+            parcoords.highlight([d]);
+          },
+          mouseout: parcoords.unhighlight,
+        });
+    });
+  });
+</script>
