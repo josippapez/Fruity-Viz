@@ -1,15 +1,9 @@
-@import url(
-  http://fonts.googleapis.com/css?family=Source + Code + Pro:400,
-  600
-);
 body {
   font-size: 14px;
   font-family: "Source Code Pro", Consolas, monaco, monospace;
   width: 960px;
   line-height: 1.45em;
-  font-size: 11px;
   font-weight: 300;
-  fill: #242424;
 }
 
 /*navigation*/
@@ -69,9 +63,8 @@ body {
 }
 
 .nav-icons a.menu-orange i {
-  color: #070702;
+  color: #293027;
 }
-
 
 .background path {
   fill: none;
@@ -98,7 +91,6 @@ body {
 }
 
 .axis text {
-  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
   cursor: move;
 }
 
@@ -128,7 +120,8 @@ ul {
 }
 #parallelCoords {
   min-height: 400px;
-  margin: 40px 25%;
+  min-width: 1000px;
+  margin: 100px 2%;
 }
 p {
   width: 560px;
@@ -161,16 +154,43 @@ input {
 }
 
 /* data table styles */
-  #grid { height: 240px; }
-  .row, .header { clear: left; font-size: 11px; line-height: 24px; height: 24px; }
-  .row:nth-child(odd) { background: rgba(0,0,0,0.05); }
-  .header { font-weight: bold; }
-  .cell { float: left; overflow: hidden; white-space: nowrap; width: 160px; height: 18px; }
-  .col-0 { width: 120px; }
-
+#grid {
+  position: relative;
+  height: 240px;
+  width: fit-content;
+  left: 17%;
+}
+.row,
+.header {
+  color: #000000;
+  clear: left;
+  font-size: 11px;
+  line-height: 24px;
+  height: 24px;
+}
+.row:nth-child(odd) {
+  background: #d6850ca1;
+}
+.row:nth-child(even) {
+  background: #ab9dbba1;
+}
+.header {
+  font-weight: bold;
+}
+.cell {
+  float: left;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100px;
+  height: 18px;
+}
+.col-0 {
+  width: 120px;
+}
 
 /* parcoords styles */
-.parcoords > svg, .parcoords > canvas {
+.parcoords > svg,
+.parcoords > canvas {
   font: 11px "Source Code Pro", Consolas, monaco, monospace;
   position: absolute;
 }
@@ -186,16 +206,17 @@ input {
   fill: transparent;
 }
 .parcoords rect.background:hover {
-  fill: rgba(120,120,120,0.2);
+  fill: rgba(120, 120, 120, 0.2);
 }
 .parcoords .resize rect {
-  fill: rgba(0,0,0,0.1);
+  fill: rgba(0, 0, 0, 0.1);
 }
 .parcoords rect.extent {
-  fill: rgba(255,255,255,0.25);
-  stroke: rgba(0,0,0,0.6);
+  fill: rgba(255, 255, 255, 0.25);
+  stroke: rgba(0, 0, 0, 0.6);
 }
-.parcoords .axis line, .parcoords .axis path {
+.parcoords .axis line,
+.parcoords .axis path {
   fill: none;
   stroke: #454545;
   shape-rendering: crispEdges;
