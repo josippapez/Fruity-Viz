@@ -58,11 +58,11 @@ body {
   color: #d13d3d;
 }
 
-.nav-icons a.menu-orange {
-  background-color: #885912;
+.nav-icons a.menu-red {
+  background-color: #d13d3d;
 }
 
-.nav-icons a.menu-orange i {
+.nav-icons a.menu-red i {
   color: #293027;
 }
 
@@ -74,7 +74,7 @@ body {
 
 .foreground path {
   fill: none;
-  stroke: steelblue;
+  stroke: rgb(0, 136, 247);
 }
 
 .brush .extent {
@@ -98,7 +98,7 @@ body {
   position: absolute;
   display: inline-flex;
   flex-direction: column;
-  left: 25%;
+  left: 17%;
 }
 
 hr {
@@ -119,9 +119,10 @@ ul {
   background: #222;
 }
 #parallelCoords {
+  position: relative;
   min-height: 400px;
   min-width: 1000px;
-  margin: 100px 2%;
+  margin: 0px 0%;
 }
 p {
   width: 560px;
@@ -156,9 +157,10 @@ input {
 /* data table styles */
 #grid {
   position: relative;
-  height: 240px;
+  overflow-y: auto;
+  height: 340px;
   width: fit-content;
-  left: 17%;
+  left: 23%;
 }
 .row,
 .header {
@@ -186,55 +188,4 @@ input {
 }
 .col-0 {
   width: 120px;
-}
-
-/* parcoords styles */
-.parcoords > svg,
-.parcoords > canvas {
-  font: 11px "Source Code Pro", Consolas, monaco, monospace;
-  position: absolute;
-}
-.parcoords > canvas {
-  pointer-events: none;
-}
-
-.parcoords text.label {
-  cursor: default;
-}
-
-.parcoords rect.background {
-  fill: transparent;
-}
-.parcoords rect.background:hover {
-  fill: rgba(120, 120, 120, 0.2);
-}
-.parcoords .resize rect {
-  fill: rgba(0, 0, 0, 0.1);
-}
-.parcoords rect.extent {
-  fill: rgba(255, 255, 255, 0.25);
-  stroke: rgba(0, 0, 0, 0.6);
-}
-.parcoords .axis line,
-.parcoords .axis path {
-  fill: none;
-  stroke: #454545;
-  shape-rendering: crispEdges;
-}
-.parcoords canvas {
-  opacity: 1;
-  -moz-transition: opacity 0.5s;
-  -webkit-transition: opacity 0.5s;
-  -o-transition: opacity 0.5s;
-}
-.parcoords canvas.faded {
-  opacity: 0.25;
-}
-.parcoords {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
