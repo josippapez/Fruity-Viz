@@ -4,6 +4,29 @@ body {
   width: 100%;
   line-height: 1.45em;
   font-weight: 300;
+  background: rgb(2, 0, 36);
+  background: -moz-linear-gradient(
+    221deg,
+    rgba(2, 0, 36, 0.4598214285714286) 0%,
+    rgba(6, 6, 89, 0.39539565826330536) 29%,
+    rgba(7, 7, 59, 0.5690651260504201) 56%,
+    rgba(0, 212, 255, 0.32816876750700286) 100%
+  );
+  background: -webkit-linear-gradient(
+    221deg,
+    rgba(2, 0, 36, 0.4598214285714286) 0%,
+    rgba(6, 6, 89, 0.39539565826330536) 29%,
+    rgba(7, 7, 59, 0.5690651260504201) 56%,
+    rgba(0, 212, 255, 0.32816876750700286) 100%
+  );
+  background: linear-gradient(
+    221deg,
+    rgba(2, 0, 36, 0.4598214285714286) 0%,
+    rgba(6, 6, 89, 0.39539565826330536) 29%,
+    rgba(7, 7, 59, 0.5690651260504201) 56%,
+    rgba(0, 212, 255, 0.32816876750700286) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00d4ff",GradientType=1);
 }
 
 .nav-icons {
