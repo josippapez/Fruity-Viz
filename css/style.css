@@ -96,7 +96,7 @@ body {
 
 .foreground path {
   fill: none;
-  stroke: rgb(0, 136, 247);
+  stroke: rgb(0, 38, 255);
 }
 
 .brush .extent {
@@ -182,6 +182,7 @@ input {
 #grid {
   position: relative;
   overflow-y: auto;
+  width: 650px;
   height: 340px;
   margin: auto;
 }
