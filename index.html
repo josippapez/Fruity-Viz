@@ -110,11 +110,11 @@
           mouseover: function (d) {
             document.getElementById(
               d.name
-            ).style = `stroke-width: 5px; stroke: ${getRandomColor()};`;
+            ).style = "stroke-width: 5px; stroke: black;";
             var x = Array.from(document.getElementsByClassName("foreground"))[0]
               .children;
             Array.from(x).map((element) => {
-              if (element.id != d.name) element.style = "opacity: 0.2";
+              if (element.id != d.name) element.style = "opacity: 0.2; stroke: gray";
             });
           },
         })
@@ -123,7 +123,7 @@
             document.getElementById(d.name).style = "stroke-width: 1px;";
             var x = Array.from(document.getElementsByClassName("foreground"))[0]
               .children;
-            Array.from(x).map((element) => (element.style = "opacity: 1"));
+            Array.from(x).map((element) => (element.style = "opacity: 1; stroke: rgb(0, 38, 255)"));
           },
         });
 
@@ -223,7 +223,7 @@
           mouseover: function (d) {
             document.getElementById(
               `active-highlighted-item${d.name}`
-            ).style = `stroke-width: 5px; stroke: ${getRandomColor()}`;
+            ).style = "stroke-width: 5px; stroke: black;";
             var x = Array.from(document.getElementsByClassName("foreground"))[0]
               .children;
             Array.from(x).map((element) => {
@@ -231,7 +231,7 @@
                 !element.style.display &&
                 element.id != `active-highlighted-item${d.name}`
               )
-                element.style = "opacity: 0.4";
+                element.style = "opacity: 0.6";
             });
           },
         })
