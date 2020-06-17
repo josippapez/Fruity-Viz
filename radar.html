@@ -111,8 +111,12 @@
           return d.name;
         });
 
-      // Kada se klikne na button, dohvati se ID fruita pomoću upisanog imena i iscrtaju
-      // se svi elementi za tog fruita
+      /* Kada se klikne na button, dohvati se ID fruita pomoću upisanog imena i iscrtaju
+      se svi elementi za tog fruita.
+      Također, ovdje vidimo da se maksimalna vrijednost grafa kalkulira sa svakim pritiskom
+      na submit tipku jer u protivnom se nebi resetirala ta vrijednost i maksimalna vrijednost
+      grafa bi ostala ista pa bi voće koje ima manju vrijednost bilo manje.
+      Nakon svakog pritiska i završetka izračuna, resetiramo maksimalnu vrijednost na nulu. */
       fruitSubmitButton.addEventListener("click", function () {
         fruitId = findfruitByName(fruit1input.value, data);
         for (key in allowedKeys) {

@@ -33,14 +33,17 @@
   </body>
 
   <script>
-    function getRandomColor() {
-      var letters = "0123456789ABCDEF";
-      var color = "#";
-      for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    }
+    /* Na ovom dijelu koda su se koristile kombinacije iz ovih izvora:
+    https://www.d3-graph-gallery.com/graph/parallel_custom.html
+    https://gist.github.com/syntagmatic/3687826
+    http://bl.ocks.org/eesur/1a2514440351ec22f176
+    http://syntagmatic.github.io/parallel-coordinates/
+    https://bl.ocks.org/mbostock/4198499
+
+    Tablicu sam ručno spojio sa grafom kako bi se dinamički prikazivali
+    podaci i kako bi bilo moguće označiti linije za pojedino voće na grafu
+    prelaskom miša preko reda u tablici
+    */
 
     var grid = d3.divgrid();
 
@@ -83,6 +86,7 @@
         }))
       );
 
+      // linije koje će biti prikazane u pozadini kada nisu označene
       background = svg
         .append("g")
         .attr("class", "background")
@@ -92,6 +96,7 @@
         .append("path")
         .attr("d", path);
 
+      // linije koje su prikazane
       foreground = svg
         .append("g")
         .attr("class", "foreground")
@@ -102,6 +107,13 @@
         .attr("d", path)
         .attr("id", (d) => d.name);
 
+      /* podešavanje mouseover i mousout funkcionalnosti za svaki red u grafu
+        Ako je voće u "foreground-u" i ako smo prešli mišem preko imena voća koje
+        odgovara tom voću koje je u foreground-u, onda ga označujemo crnom bojom i
+        mijenjamo debljinu linije, dok drugim linijama postavljamo prozirnostna 0.2
+        i mijenjamo boju u sivu.
+        Kada mišem izađemo iz tablice, vraćamo sve linije koje su u foreground-u na
+        početnu vrijednost. */
       d3.select("#grid")
         .datum(fruit)
         .call(grid)
@@ -127,6 +139,8 @@
           },
         });
 
+      /* U ovom dijelu koda se postavljaju paralelne osi i njihove funkcije za
+      pomicanje osi na druga mjesta. */
       var g = svg
         .selectAll(".dimension")
         .data(dimensions)
@@ -185,6 +199,8 @@
           return d;
         });
 
+        /* U ovom dijelu koda se postavljaju funkcije za postavljanje intervala
+        u kojem se vrijednosti gledaju kao i pomicanje tog istog intervala. */
       g.append("g")
         .attr("class", "brush")
         .each(function (d) {
@@ -202,8 +218,12 @@
     });
 
     function drawGrid(data) {
-      // Svakom retku dodaje se mouseover listener koji će označiti taj podatak na grafu
-
+      /* Svakom retku dodaje se mouseover i mouseout listener koji će označiti taj podatak na grafu.
+      Ovdje se ponovno postavlja na redove elemenata jer se graf ponovno iscrtava kada se
+      označe vrijednosti na osima. Tako da kada se to dogodi, potrebno je filtrirati
+      samo ono voće koje se nalazi unutar tog odabranog intervala te mu dodjeliti
+      ponovno mousover i mousout listener.
+      */
       // IZVORI:
       // https://gist.github.com/syntagmatic/3687826
       // http://bl.ocks.org/eesur/1a2514440351ec22f176
@@ -273,6 +293,9 @@
       d3.event.sourceEvent.stopPropagation();
     }
 
+    /* Funkcija za izračunavanje pozicije na kojoj se nalazi brush
+    kao i na kojoj se osi nalazi kako bi lakše prosljedili točne podatke
+    za prikazivanje u tablici. */
     function brush(fruit) {
       var actives = dimensions.filter(function (p) {
           return !y[p].brush.empty();
