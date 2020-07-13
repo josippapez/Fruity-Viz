@@ -1,160 +1,157 @@
 #fruit1info,
 #fruit2info {
-  padding: 10px 5px;
+    padding: 10px 5px;
 }
 
 #fruit1info {
-  position: absolute;
-  background: #9D090199;
-  left: 0;
+    position: absolute;
+    background: #9D090199;
+    left: 0;
 }
 
 #fruit2info {
-  position: absolute;
-  background: #09099950;
-  right: 0;
+    position: absolute;
+    background: #09099950;
+    right: 0;
 }
 
 .search {
-  display: inline-flex;
-  height: fit-content;
+    display: inline-flex;
+    height: fit-content;
 }
 
 #fruit1SearchButton {
-  background: #000000;
+    background: #000000;
 }
 
 #fruit1SearchButton:hover {
-  background: #87af7c;
-  text-decoration: none;
+    background: #87af7c;
+    text-decoration: none;
 }
 
 #fruit2SearchButton {
-  background: #000000;
+    background: #000000;
 }
 
 #fruit2SearchButton:hover {
-  background: #c24a4a;
-  text-decoration: none;
+    background: #c24a4a;
+    text-decoration: none;
 }
 
 .searchLabel {
-  margin: 0 0;
-  font-size: 2em;
-  letter-spacing: 3px;
-  width: fit-content;
+    margin: 0 0;
+    font-size: 2em;
+    letter-spacing: 3px;
+    width: fit-content;
 }
 
 .container-flex {
-  position: relative;
-  min-height: 400px;
-  min-width: 1000px;
-  margin: 0px 0%;
+    position: relative;
+    min-height: 400px;
+    min-width: 1000px;
+    margin: 0px 0%;
 }
 
 #fruit1name,
 #fruit2name {
-  font-size: 2.5em;
-  color: #5e5b52;
-  letter-spacing: 4px;
-  background-color: rgb(250, 224, 120);
-  border: 1px solid rgb(161, 135, 31);
-  border-radius: 50%;
-  margin: 10px 0;
+    font-size: 2.5em;
+    color: #5e5b52;
+    letter-spacing: 4px;
+    background-color: rgb(250, 224, 120);
+    border: 1px solid rgb(161, 135, 31);
+    border-radius: 50%;
+    margin: 10px 0;
 }
 
 #fruit2name {
-  background-color: #b3d4ab;
-  border: 1px solid #333333;
+    background-color: #b3d4ab;
+    border: 1px solid #333333;
 }
 
 #fruit1data {
-  margin-top: 10px;
-  background-color: rgb(250, 224, 120);
-  border: 1px solid rgb(161, 135, 31);
-  border-radius: 10%;
+    margin-top: 10px;
+    background-color: rgb(250, 224, 120);
+    border: 1px solid rgb(161, 135, 31);
+    border-radius: 10%;
 }
 
 #fruit2data {
-  margin-top: 10px;
-  background-color: #b3d4ab;
-  border: 1px solid #333333;
-  border-radius: 10%;
+    margin-top: 10px;
+    background-color: #b3d4ab;
+    border: 1px solid #333333;
+    border-radius: 10%;
 }
 
 #fruit1Input,
 #fruit2Input {
-  width: 160px;
-  height: 30px;
-  font-size: 14pt;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0 -12px;
-  background: none !important;
+    width: 160px;
+    height: 30px;
+    font-size: 14pt;
 }
 
 .column {
-  padding: 0 12px;
-  text-align: center;
+    padding: 0 12px;
+    text-align: center;
 }
 
 .column-4 {
-  border: 1px solid #000000;
-  border-radius: 16px;
-  flex: 0 0 23%;
-  margin: 0 10px 0 10px;
+    border: 1px solid #000000;
+    border-radius: 16px;
+    flex: 0 0 23%;
+    margin: 0 10px 0 10px;
 }
 
 .column-6 {
-  flex: 0 0 50%;
+    flex: 0 0 50%;
 }
 
 .legend {
-  font-family: "Raleway", sans-serif;
-  fill: #333333;
+    font-family: "Raleway", sans-serif;
+    fill: #333333;
 }
 
 .legend tspan {
-  font-size: 1.1em;
+    font-size: 1.1em;
 }
 
 text.axisLabel {
-  font-size: 1.9em;
+    font-size: 1.9em;
 }
 
 .tooltip {
-  fill: #333333;
+    fill: #333333;
 }
 
 g.y.axis,
 text.label {
-  font-family: "Roboto", sans-serif;
-  font-size: 1.2em;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.2em;
 }
 
 g.y.axis {
-  padding-right: 8px;
+    padding-right: 8px;
 }
 
 .butn {
-  margin: 10px 0;
-  cursor: pointer;
-  -webkit-border-radius: 8;
-  -moz-border-radius: 8;
-  border-radius: 8px;
-  color: rgb(255, 255, 255);
-  font-size: 20px;
-  padding: 5px 10px 5px 10px;
-  text-decoration: none;
-  border: 1px solid #666;
+    margin: 10px 0;
+    cursor: pointer;
+    -webkit-border-radius: 8;
+    -moz-border-radius: 8;
+    border-radius: 8px;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+    border: 1px solid #666;
 }
 
 .resetScale {
     position: absolute;
     bottom: 0;
     left: 47%;
+}
+
+.active {
+    background-color: #5e5b52 !important;
+    color: white !important;
 }

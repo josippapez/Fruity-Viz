@@ -23,9 +23,40 @@ d3.divgrid = function (config) {
       })
       .classed("cell", true);
 
-    selection.selectAll(".header .cell").text(function (d) {
-      return d;
-    });
+    var desc = true;
+
+    selection
+      .selectAll(".header .cell")
+      .text(function (d) {
+        return d;
+      })
+      .on("click", function (d) {
+        if (d == "name") {
+          if (desc) {
+            rows.sort(function (a, b) {
+              return d3.descending(a[d], b[d]);
+            });
+            desc = !desc;
+          } else {
+            rows.sort(function (a, b) {
+              return d3.ascending(a[d], b[d]);
+            });
+            desc = !desc;
+          }
+        } else {
+          if (desc) {
+            rows.sort(function (a, b) {
+              return b[d] - a[d];
+            });
+            desc = !desc;
+          } else {
+            rows.sort(function (a, b) {
+              return a[d] - b[d];
+            });
+            desc = !desc;
+          }
+        }
+      });
 
     header.exit().remove();
 
@@ -35,7 +66,6 @@ d3.divgrid = function (config) {
     });
 
     rows.enter().append("div").attr("class", "row");
-
     rows.exit().remove();
 
     var cells = selection
