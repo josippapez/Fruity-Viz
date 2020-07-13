@@ -1,7 +1,7 @@
-name,carbohydrates (g),protein (g),fat (g),calories (kcal),sugar (g),wiki
-Apple,11.4,0.3,0.4,52,10.3,https://en.wikipedia.org/wiki/Apple
-Banana,22,1,0.2,96,17.2,https://en.wikipedia.org/wiki/Banana
-Blueberry,5.5,0,0.4,29,5.4,https://en.wikipedia.org/wiki/Blueberry
+name,carbohydrates (g),protein (g),fat (g),calories (kcal/100g),sugar (g),wiki
+Apple,13.81,0.26,0.17,52,10.39,https://en.wikipedia.org/wiki/Apple
+Banana,22,1,0.2,89,17.2,https://en.wikipedia.org/wiki/Banana
+Blueberry,5.5,0,0.4,57,5.4,https://en.wikipedia.org/wiki/Blueberry
 Cherry,12,1,0.3,50,8,https://en.wikipedia.org/wiki/Cherry
 Lemon,9,1.1,0.3,29,2.5,https://en.wikipedia.org/wiki/Lemon
 Mango,15,0.82,0.38,60,13.7,https://en.wikipedia.org/wiki/Mango

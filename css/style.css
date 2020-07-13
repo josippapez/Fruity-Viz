@@ -1,195 +1,216 @@
 body {
-  font-size: 14px;
-  font-family: "Source Code Pro", Consolas, monaco, monospace;
-  width: 100%;
-  line-height: 1.45em;
-  font-weight: 300;
-  background-image: url(./background.png);
+    font-size: 14px;
+    font-family: "Source Code Pro", Consolas, monaco, monospace;
+    width: 100%;
+    line-height: 1.45em;
+    font-weight: 300;
+    background-image: url(./background.png);
 }
 
 .nav-icons {
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-  font-size: 0;
-  margin-bottom: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 0;
+    margin-bottom: 0px;
 }
 
 .nav-icons a {
-  margin: 0 160px;
-  display: inline-block;
-  color: #ffffff;
-  background-color: #232526;
-  font-size: 40px;
-  font-weight: bold;
-  box-shadow: 1px 2px 1px 0 rgba(0, 0, 0, 0.1);
-  text-transform: uppercase;
-  text-decoration: none;
-  white-space: nowrap;
-  width: 200px;
-  margin-right: 200px;
-  height: 40px;
-  padding-top: 20px;
+    margin: 0 160px;
+    display: inline-block;
+    color: #ffffff;
+    background-color: #232526;
+    font-size: 40px;
+    font-weight: bold;
+    box-shadow: 1px 2px 1px 0 rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    width: 200px;
+    margin-right: 200px;
+    height: 40px;
+    padding-top: 20px;
 }
 
 .nav-icons a:hover {
-  opacity: 0.92;
+    opacity: 0.92;
 }
 
 .nav-icons a i {
-  margin: 10px;
-  display: block;
-  font-size: 1.5em;
-  line-height: 1.5;
+    margin: 10px;
+    display: block;
+    font-size: 1.5em;
+    line-height: 1.5;
 }
 
 .nav-icons a span {
-  display: block;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 0;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 0;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 .nav-icons a.menu-dark {
-  background-color: #293027;
+    background-color: #293027;
 }
 
 .nav-icons a.menu-dark i {
-  color: #d13d3d;
+    color: #d13d3d;
 }
 
 .nav-icons a.menu-red {
-  background-color: #d13d3d;
+    background-color: #d13d3d;
 }
 
 .nav-icons a.menu-red i {
-  color: #293027;
+    color: #293027;
 }
 
 .background path {
-  fill: none;
-  stroke: #ddd;
-  shape-rendering: crispEdges;
+    fill: none;
+    stroke: #ddd;
+    shape-rendering: crispEdges;
 }
 
 .foreground path {
-  fill: none;
-  stroke: rgb(0, 38, 255);
+    fill: none;
+    stroke: rgb(0, 38, 255);
 }
 
 .brush .extent {
-  fill-opacity: 0.3;
-  stroke: #fff;
-  shape-rendering: crispEdges;
+    fill-opacity: 0.3;
+    stroke: #fff;
+    shape-rendering: crispEdges;
 }
 
 .axis line,
 .axis path {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
 }
 
 .axis text {
-  cursor: move;
+    cursor: move;
 }
 
 .graphs {
-  position: absolute;
-  display: inline-flex;
-  flex-direction: column;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
+    position: absolute;
+    display: inline-flex;
+    flex-direction: column;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
 }
 
 hr {
-  width: 100%;
+    width: 100%;
 }
 
 a {
-  color: #454545;
-}
-a:hover {
-  color: #000;
-}
-ul {
-  margin: 0 20px;
-  padding: 0;
-}
-.dark {
-  background: #222;
-}
-#parallelCoords {
-  position: relative;
-  min-height: 400px;
-  min-width: 1000px;
-  margin: auto;
-}
-p {
-  width: 560px;
-}
-pre {
-  color: #444;
-  font-family: Ubuntu Mono, Monaco, monospace;
-  padding: 4px 8px;
-  background: #f2f2f2;
-  border: 1px solid #ccc;
-}
-h1 small {
-  font-weight: normal;
-  font-size: 0.5em;
-}
-h3 {
-  margin-top: 40px;
-}
-.float {
-  float: left;
-}
-.centered {
-  text-align: center;
-}
-.hide {
-  display: none;
-}
-input {
-  font-size: 16px;
+    color: #454545;
 }
 
-/* data table styles */
-#grid {
-  position: relative;
-  overflow-y: auto;
-  width: max-content;
-  height: 340px;
-  margin: auto;
+a:hover {
+    color: #000;
 }
+
+ul {
+    margin: 0 20px;
+    padding: 0;
+}
+
+.dark {
+    background: #222;
+}
+
+#parallelCoords {
+    position: relative;
+    min-height: 400px;
+    min-width: 1000px;
+    margin: auto;
+}
+
+p {
+    width: 560px;
+}
+
+pre {
+    color: #444;
+    font-family: Ubuntu Mono, Monaco, monospace;
+    padding: 4px 8px;
+    background: #f2f2f2;
+    border: 1px solid #ccc;
+}
+
+h1 small {
+    font-weight: normal;
+    font-size: 0.5em;
+}
+
+h3 {
+    margin-top: 40px;
+}
+
+.float {
+    float: left;
+}
+
+.centered {
+    text-align: center;
+}
+
+.hide {
+    display: none;
+}
+
+input {
+    font-size: 16px;
+}
+
+
+/* data table styles */
+
+#grid {
+    position: relative;
+    overflow-y: auto;
+    width: max-content;
+    height: 340px;
+    margin: auto;
+}
+
 .row,
 .header {
-  color: #000000;
-  clear: left;
-  font-size: 11px;
-  line-height: 24px;
-  height: 24px;
+    color: #000000;
+    clear: left;
+    font-size: 11px;
+    line-height: 24px;
+    height: 24px;
 }
+
 .row:nth-child(odd) {
-  background: #d6850ca1;
+    background: #d6850ca1;
 }
+
 .row:nth-child(even) {
-  background: #ab9dbba1;
+    background: #ab9dbba1;
 }
+
 .header {
-  font-weight: bold;
+    font-weight: bold;
 }
+
 .cell {
-  float: left;
-  white-space: nowrap;
-  width: 110px;
-  height: 18px;
+    float: left;
+    white-space: nowrap;
+    width: 130px;
+    height: 18px;
 }
+
 .col-0 {
-  width: 120px;
+    width: 120px;
 }
+
 .col-6 {
-  width: fit-content;
+    width: fit-content;
 }
